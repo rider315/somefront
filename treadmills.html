@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JTT Fitness Membership</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero {
+            background: url('https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') center center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .form-section {
+            margin-top: 40px;
+        }
+
+        .thank-you {
+            margin-top: 20px;
+            display: none;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #17a2b8;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">JTT FITNESS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#membership-form">Membership</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Join Our Fitness Community</h1>
+    </div>
+
+    <!-- Membership Form Section -->
+    <div class="container form-section">
+        <h2 class="text-center">Become a Member Today</h2>
+        <p class="text-center">Fill out the form below to get started on your fitness journey:</p>
+
+        <!-- Membership Form -->
+        <form id="membership-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" class="form-control" id="weight" placeholder="E.g., 70" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" class="form-control" id="height" placeholder="E.g., 175" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="membership-plan">Membership Plan</label>
+                <select class="form-control" id="membership-plan" required>
+                    <option value="" disabled selected>Select your plan</option>
+                    <option>Monthly - ₹1500</option>
+                    <option>Quarterly - ₹5500</option>
+                    <option>Yearly - ₹15000</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Membership</button>
+        </form>
+
+        <!-- Thank You Message -->
+        <div class="thank-you alert alert-success text-center" id="thank-you">
+            <h4>Thank You for Joining!</h4>
+            <p>We have received your details and will contact you soon.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <p>© 2023 JTT FITNESS. All Rights Reserved.</p>
+        <p><a href="contact.html">Contact Us</a> | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Select form and thank-you message elements
+        const form = document.getElementById('membership-form');
+        const thankYouMessage = document.getElementById('thank-you');
+
+        // Add event listener to handle form submission
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            // Show thank-you message
+            thankYouMessage.style.display = 'block';
+
+            // Clear the form
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JTT Store</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <script src="https://kit.fontawesome.com/ad0c4e912f.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap" rel="stylesheet" />
+  <style>
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .hero {
+      background: linear-gradient(90deg, #dc3545 0%, #ff6b6b 100%);
+    }
+
+    .card img {
+      object-fit: cover;
+      height: 150px;
+    }
+
+    .thank-you-msg {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background-color: #ffffff;
+      padding: 20px;
+      border: 2px solid #dc3545;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .thank-you-msg h3 {
+      color: #dc3545;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="bg-dark text-white">
+    <nav class="container d-flex justify-content-between align-items-center py-3">
+      <div class="d-flex align-items-center">
+        <img src="https://img.freepik.com/premium-vector/fitness-center-logo-sport-fitness-logo-design-gym-logo-icon-design-vector-stock_279597-366.jpg?w=2000"
+          alt="JTT Logo" class="logo mr-2" />
+        <h1 class="m-0">JTT</h1>
+      </div>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Collection</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Shopping</a></li>
+      </ul>
+      <button class="btn btn-danger">Post</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero text-white text-center py-5">
+    <div class="container">
+      <h2 class="display-4">Welcome to JTT Store</h2>
+      <p class="lead">Your marketplace for buying the best fitness products at reasonable prices.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container py-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-3">
+        <h4>Categories</h4>
+        <ul class="list-unstyled">
+          <li><input type="checkbox" id="filterClothing" value="Clothing" /> <label for="filterClothing">Clothing</label></li>
+          <li><input type="checkbox" id="filterEquipment" value="Equipment" /> <label for="filterEquipment">Equipment</label></li>
+          <li><input type="checkbox" id="filterSupplements" value="Supplements" /> <label for="filterSupplements">Supplements</label></li>
+        </ul>
+        <h4>Price Range</h4>
+        <ul class="list-unstyled">
+          <li><input type="checkbox" id="price1" value="1" /> <label for="price1">₹100 - ₹500</label></li>
+          <li><input type="checkbox" id="price2" value="2" /> <label for="price2">₹501 - ₹1000</label></li>
+          <li><input type="checkbox" id="price3" value="3" /> <label for="price3">₹1001 - ₹50000</label></li>
+        </ul>
+      </aside>
+
+      <!-- Products Section -->
+      <section class="col-md-9">
+        <h4>Products</h4>
+        <div id="productList" class="row"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <p>© 2024 JTT Store. All rights reserved.</p>
+      <div>
+        <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Thank You Message -->
+  <div class="thank-you-msg" id="thankYouMessage">
+    <h3>Hurray! 🎉</h3>
+    <p id="savedMessage"></p>
+    <button onclick="closeThankYouMessage()" class="btn btn-danger">Close</button>
+  </div>
+
+  <script>
+    const products = [
+      // Clothing
+      { id: 1, name: "Workout T-Shirt", category: "Clothing", price: 500, img: "https://m.media-amazon.com/images/I/51fbEVpi+ZL._AC_UY1100_.jpg" },
+      { id: 2, name: "Yoga Pants", category: "Clothing", price: 700, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRW7PWXrkjQUdwAWrgyIF0uvDNOkwsUiYdYQ&s" },
+      { id: 3, name: "Gym Shorts", category: "Clothing", price: 400, img: "https://contents.mediadecathlon.com/p1851232/6a687d1a2d04e52d1e052be5f9dbb605/p1851232.jpg?format=auto&quality=70&f=2520x0" },
+      { id: 4, name: "Tank Top", category: "Clothing", price: 300, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0iVCCxCzzlGw9GcdRQXHYwBFAnAsW6En7mg&s" },
+      { id: 5, name: "Athletic Jacket", category: "Clothing", price: 1200, img: "https://www.master-athletics.com/cdn/shop/files/TOP016-N_800x.png?v=1699469490" },
+
+      // Equipment
+      { id: 6, name: "Dumbbell Set", category: "Equipment", price: 1500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIOZR85ycl_jlQ-FqLIKwPoD4APXE9x2MZjw&s" },
+      { id: 7, name: "Yoga Mat", category: "Equipment", price: 800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR668uJqASN0hTMyQBZNaFrofiavdQlvbWBFA&s" },
+      { id: 8, name: "Kettlebell", category: "Equipment", price: 900, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT69lwtP6qgP9PTmVYATbjsMMaguPqHQZjlg&s" },
+      { id: 9, name: "Skipping Rope", category: "Equipment", price: 300, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb8IfqensbmHFQK6oqcmm783dcDfTcKLqEhg&s" },
+      { id: 10, name: "Treadmill", category: "Equipment", price: 50000, img: "https://contents.mediadecathlon.com/p2544966/094c2f605cc932357646d771743046ef/p2544966.jpg?format=auto&quality=70&f=2520x0" },
+
+      // Supplements
+      { id: 11, name: "Protein Powder", category: "Supplements", price: 2000, img: "https://img2.hkrtcdn.com/28400/prd_2839991-MuscleBlaze-Beginners-Protein-Powder-4.4-lb-Chocolate_o.jpg" },
+      { id: 12, name: "Multivitamins", category: "Supplements", price: 1200, img: "https://inlifehealthcare.com/cdn/shop/files/inlife-multivitamin-and-mineral-for-men-60-tablets-vegetarian-supplement-200192.jpg?v=1720753900&width=800" },
+      { id: 13, name: "Creatine", category: "Supplements", price: 1500, img: "https://img8.hkrtcdn.com/35711/prd_3571057-MuscleBlaze-Creatine-Monohydrate-CreAMP-0.22-lb-Unflavoured_o.jpg" },
+      { id: 14, name: "Fish Oil", category: "Supplements", price: 1000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNpHHza_TrJ7a6BP3_rDaZJ0PrrsG-uDpjA&s" },
+      { id: 15, name: "BCAA", category: "Supplements", price: 1800, img: "https://cdn.staticans.com/image/tr:e-sharpen-01,h-1350,w-1080,cm-pad_resize/catalog/optimum/product/1145171/1142951_1.jpg" }
+    ];
+
+    const userPoints = 1000;
+    const pointValue = 0.1;
+
+    function loadProducts(filteredProducts = products) {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = "";
+      filteredProducts.forEach((product) => {
+        const discount = userPoints * pointValue;
+        const priceAfterDiscount = product.price - discount;
+        const productCard = `
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <img src="${product.img}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">₹${product.price}</p>
+                <p class="card-text">Price After Discount: ₹${priceAfterDiscount.toFixed(2)}</p>
+                <button class="btn btn-primary" onclick="buyProduct('${product.name}', ${product.price})">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        `;
+        productList.innerHTML += productCard;
+      });
+    }
+
+    function buyProduct(productName, originalPrice) {
+      const discount = userPoints * pointValue;
+      const priceAfterDiscount = originalPrice - discount;
+      const savedAmount = originalPrice - priceAfterDiscount;
+      document.getElementById("savedMessage").textContent = `You've saved ₹${savedAmount.toFixed(2)}! Thank you for shopping with us!`;
+      document.getElementById("thankYouMessage").style.display = "block";
+    }
+
+    function closeThankYouMessage() {
+      document.getElementById("thankYouMessage").style.display = "none";
+    }
+
+    function applyFilters() {
+      const selectedCategories = [];
+      const selectedPrices = [];
+
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach((checkbox) => {
+        if (checkbox.value) {
+          if (checkbox.id.includes("filter")) {
+            selectedCategories.push(checkbox.value);
+          } else if (checkbox.id.includes("price")) {
+            selectedPrices.push(checkbox.value);
+          }
+        }
+      });
+
+      let filteredProducts = products.filter((product) => {
+        let categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+        let priceMatch = selectedPrices.length === 0;
+
+        if (selectedPrices.includes("1") && product.price >= 100 && product.price <= 500) priceMatch = true;
+        if (selectedPrices.includes("2") && product.price >= 501 && product.price <= 1000) priceMatch = true;
+        if (selectedPrices.includes("3") && product.price >= 1001 && product.price <= 50000) priceMatch = true;
+
+        return categoryMatch && priceMatch;
+      });
+
+      loadProducts(filteredProducts);
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.addEventListener("change", applyFilters);
+    });
+
+    loadProducts();
+  </script>
+</body>
+
+</html>

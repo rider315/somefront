@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Daily Workout Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero {
+            background: url('https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=1600') center center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .content-section {
+            margin-top: 40px;
+        }
+
+        .workout-log {
+            margin-top: 30px;
+        }
+
+        .card {
+            margin-top: 15px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #17a2b8;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">JTT FITNESS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#workout-log">Workout Tracker</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Track Your Daily Workouts</h1>
+    </div>
+
+    <!-- Workout Form Section -->
+    <div class="container content-section">
+        <h2 class="text-center">Daily Workout Tracker</h2>
+        <p class="text-center">Log your workout routine below:</p>
+
+        <!-- Input Form -->
+        <form id="workout-form">
+            <div class="form-group">
+                <label for="day">Day Number</label>
+                <input type="number" class="form-control" id="day" placeholder="Enter the day number (e.g., 1, 2)" required>
+            </div>
+            <div class="form-group">
+                <label for="muscle">Muscle Group Trained</label>
+                <input type="text" class="form-control" id="muscle" placeholder="E.g., Chest, Back, Legs" required>
+            </div>
+            <div class="form-group">
+                <label for="exercise">Exercise Name</label>
+                <input type="text" class="form-control" id="exercise" placeholder="E.g., Bench Press, Deadlift" required>
+            </div>
+            <div class="form-group">
+                <label for="reps">Reps / Time</label>
+                <input type="text" class="form-control" id="reps" placeholder="E.g., 10 reps, 1 min" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add Workout</button>
+        </form>
+    </div>
+
+    <!-- Workout Log Section -->
+    <div class="container workout-log" id="workout-log">
+        <h2 class="text-center">Your Logged Workouts</h2>
+        <div id="workout-entries" class="row">
+            <!-- Workout cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <p>© 2023 JTT FITNESS. All Rights Reserved.</p>
+        <p><a href="contact.html">Contact Us</a> | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Select elements
+        const form = document.getElementById('workout-form');
+        const workoutEntries = document.getElementById('workout-entries');
+
+        // Add submit event listener to the form
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const day = document.getElementById('day').value;
+            const muscle = document.getElementById('muscle').value;
+            const exercise = document.getElementById('exercise').value;
+            const reps = document.getElementById('reps').value;
+
+            // Create a new workout card
+            const card = document.createElement('div');
+            card.classList.add('col-md-4');
+            card.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Day ${day}</h5>
+                        <p><strong>Muscle Group:</strong> ${muscle}</p>
+                        <p><strong>Exercise:</strong> ${exercise}</p>
+                        <p><strong>Reps/Time:</strong> ${reps}</p>
+                    </div>
+                </div>
+            `;
+
+            // Append the new card to the workout entries
+            workoutEntries.appendChild(card);
+
+            // Clear the form
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
