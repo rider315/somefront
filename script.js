@@ -39,6 +39,7 @@ function validateAndRedirect() {
     nameError.textContent = "Name is required.";
     return;
   }
+  
 
   // Make a POST request to the backend server
   fetch("https://someback-9imm.onrender.com/submit", {
