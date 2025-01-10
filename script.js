@@ -41,7 +41,7 @@ function validateAndRedirect() {
   }
 
   // Make a POST request to the backend server
-  fetch("https://jttfront-gamma.vercel.app/submit", {
+  fetch("https://someback-9imm.onrender.com/submit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
